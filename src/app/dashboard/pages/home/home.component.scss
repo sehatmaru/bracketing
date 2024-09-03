@@ -1,0 +1,204 @@
+@media only screen and (min-width: 1011px) {
+    .key-card {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media only screen and (min-width: 841px) and (max-width: 1010px) {
+    .key-card {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media only screen and (min-width: 611px) and (max-width: 840px) {
+    .key-card {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 610px) {
+    .key-card {
+        grid-template-columns: 1fr;
+    }
+
+    .key:active {
+        animation: press 0.2s 1 linear;
+    }
+
+    .key {
+        box-shadow: 5px 6px 0px rgb(0, 0, 0) !important;
+    }
+}
+
+.key-card {
+    max-height: calc(100dvh - 135px);
+    margin: 10px;
+    overflow: auto;
+    display: grid;
+}
+
+p {
+    margin-bottom: 0 !important;
+}
+
+.key {
+    display: flex;
+    margin: 5px;
+    border: 1px solid;
+    border-radius: 10px;
+    transition: .4s;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.key:hover {
+    box-shadow: 5px 6px 0px rgb(0, 0, 0);
+}
+
+.img-icon {
+    width: 50px;
+    // border: 1px solid;
+    // border-radius: 5px;
+}
+
+.key-detail {
+    margin-left: 5px;
+}
+
+.search {
+    display: grid;
+    grid-template-columns: 8fr 1fr 0fr;
+    margin: 10px;
+}
+
+.clear {
+    height: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
+}
+
+.copy {
+    transition: 0.7s;
+}
+
+.copy:active {
+    animation: press 0.2s 1 linear;
+}
+
+.copy:active svg:last-child {
+    animation: bounce 0.2s 1 linear;
+}
+
+@keyframes press {
+    0% {
+        transform: scale(1);
+    }
+  
+    50% {
+        transform: scale(0.92);
+    }
+  
+    to {
+        transform: scale(1);
+    }
+}
+  
+@keyframes bounce {
+    50% {
+        transform: rotate(5deg) translate(20px, -50px);
+    }
+  
+    to {
+        transform: scale(0.9) rotate(10deg) translate(50px, -80px);
+        opacity: 0;
+    }
+}
+
+.larger-btn:hover {
+    width: 145px !important;
+}
+
+.Btn {
+    --black: #000000;
+    --ch-black: #141414;
+    --eer-black: #1b1b1b;
+    --night-rider: #2e2e2e;
+    --white: #ffffff;
+    --af-white: #f3f3f3;
+    --ch-white: #e1e1e1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199) !important;
+    background-color: var(--white);
+    padding: 0 !important;
+}
+  
+/* plus sign */
+.sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.sign svg {
+    width: 17px;
+}
+  
+.sign svg path {
+    fill: var(--night-rider);
+}
+
+/* text */
+.text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: var(--night-rider);
+    font-weight: 600;
+    transition-duration: .3s;
+    white-space: nowrap;
+}
+  
+@media only screen and (min-width: 426px) {
+    /* hover effect on button width */
+    .Btn:hover {
+        width: 125px;
+        border-radius: 5px;
+        transition-duration: .3s;
+    }
+    
+    .Btn:hover .sign {
+        width: 30%;
+        transition-duration: .3s;
+        padding-left: 20px;
+    }
+    /* hover effect button's text */
+    .Btn:hover .text {
+        opacity: 1;
+        width: 70%;
+        transition-duration: .3s;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+    /* button click effect*/
+    .Btn:active {
+        transform: translate(2px ,2px);
+    }
+
+    .generate:hover {
+        width: 248px !important;
+    }
+}

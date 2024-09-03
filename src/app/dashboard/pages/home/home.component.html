@@ -1,0 +1,62 @@
+<div>
+    <div style="display: flex; margin: 10px; justify-content: space-between;">
+        <div style="display: flex;">
+            <button class="Btn larger-btn" (click)="toCreateForm()">
+                <div class="sign">
+                    <img class="clear copy" width="18" src="../../../../assets/icons/add-square-svgrepo-com.svg">
+                </div>
+                
+                <div class="text">Add Key</div>
+            </button>
+            <button class="Btn" (click)="toHistory()" style="margin: 0 10px;">
+                <div class="sign">
+                    <img class="clear copy" width="18" src="../../../../assets/icons/history-svgrepo-com.svg">
+                </div>
+                
+                <div class="text">History</div>
+            </button>
+            <button class="Btn generate" (click)="generatePassword()">
+                <div class="sign">
+                    <img class="clear copy" style="width: 33px !important;" width="18" src="../../../../assets/icons/random-2dice-svgrepo-com.svg">
+                </div>
+                
+                <div class="text">Generate Password</div>
+            </button>
+        </div>
+        
+        <p id="generated-password" style="visibility: hidden;" (click)="doCopy(generatedPassword)"></p>
+        
+        <button class="Btn" (click)="doLogout()">
+            <div class="sign">
+                <img class="clear copy" width="18" src="../../../../assets/icons/logout-svgrepo-com.svg">
+            </div>
+            
+            <div class="text">Logout</div>
+        </button>
+    </div>
+
+    <div class="list">
+        <div class="search">
+            <input type="text" name="search" class="input" placeholder="Search key..." [(ngModel)]="searchValue" (input)="getKeyList()">
+        
+            <select class="select" [(ngModel)]="categoryValue" (ngModelChange)="getKeyList()">
+                <option *ngFor="let category of categoryList" [value]="category">{{ category }}</option>
+            </select>
+        
+            <img class="clear" src="../../../../assets/icons/close-md-svgrepo-com.svg" (click)="clearSearch()">
+        </div>
+        
+        <div class="key-card">
+            <div class="key" *ngFor="let key of keyList" style="display: flex; justify-content: space-between;"  (click)="toRevealKey(key.secureId)">
+                <div style="display: flex; margin: 5px">
+                    <img class="img-icon" [src]="key.icon" alt="">
+        
+                    <div class="key-detail">
+                        <p><b>{{ key.name }}</b></p>
+                        <p>{{ key.username }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

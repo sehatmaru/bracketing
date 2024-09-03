@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 425px) {
+    .container {
+        position: fixed;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+h3 {
+    margin: 5px;
+    letter-spacing: 5px;
+    font-weight: bold;
+}
+
+p {
+    margin-left: 5px !important;
+    font-size: 0.7rem;
+    margin-bottom: 0 !important;
+}
+
+.form-container {
+    display: flex;
+    margin: 15px 0;
+}
+
+.input {
+    width: 36px;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

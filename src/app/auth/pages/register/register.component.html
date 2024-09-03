@@ -1,0 +1,36 @@
+<div class="container">
+    <div style="width: 300px;">
+        <h3>Sign Up</h3>
+        
+        <div class="form-container">
+            <input type="text" id="name" class="input" placeholder="Name" [(ngModel)]="name">
+        </div>
+
+        <div class="form-container">
+            <input type="text" id="username" class="input" placeholder="Username" [(ngModel)]="username">
+        </div>
+
+        <div class="form-container">
+            <input type="email" id="email" class="input" placeholder="Email" [(ngModel)]="email">
+            <p style="color: red;" *ngIf="!isEmailValid">Invalid email</p>
+        </div>
+
+        <div class="form-container">
+            <input type="password" id="password" class="input" placeholder="Password" [(ngModel)]="password">
+        </div>
+
+        <div class="form-container">
+            <input type="password" id="re-password" class="input" placeholder="Re-Password" [(ngModel)]="rePassword">
+            <p style="color: red;" *ngIf="isPasswordMissmatch">Password missmatch</p>
+        </div>
+    
+        <p style="font-size: 0.9rem !important;">Or click <span style="cursor: pointer; font-weight: 700;" (click)="toLogin()">here</span> to Sign In</p>
+
+        <div class="form-container" style="margin-left: 5px;">
+            <button class="arc-btn-retro" style="margin-left: auto !important;" 
+                (click)="submit()" [disabled]="!isValid()">
+                Continue
+            </button>
+        </div>
+    </div>
+</div>

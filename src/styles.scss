@@ -1,1 +1,147 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: hidden; }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/theming';
+@include mat-core();
+
+$my-app-primary: mat-palette($mat-gray, 600, 900);
+$my-app-accent:  mat-palette($mat-gray, 500, 900, A100);
+$my-app-warn:    mat-palette($mat-deep-orange);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include angular-material-theme($my-app-theme);
+
+.btn-primary:hover {
+    background-color:#111;
+    transition: 0.7s;
+}
+
+.btn-primary:active {
+    background-color:#111 !important;
+}
+
+.btn-primary:active:focus {
+    box-shadow: none !important;
+}
+
+.container-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+}
+
+.input {
+    --font-color: #323232;
+    --font-color-sub: #666;
+    --bg-color: #fff;
+    --main-color: #323232;
+    // width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    background-color: var(--bg-color);
+    box-shadow: 4px 4px var(--main-color);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--font-color);
+    padding: 5px 10px;
+    outline: none;
+    margin: 5px;
+}
+  
+.input::placeholder {
+    color: var(--font-color-sub);
+    opacity: 0.8;
+}
+
+.select {
+    --font-color: #323232;
+    --font-color-sub: #666;
+    --bg-color: #fff;
+    --main-color: #323232;
+    /* width: 200px; */
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    background-color: var(--bg-color);
+    box-shadow: 4px 4px var(--main-color);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--font-color);
+    padding: 5px 10px;
+    outline: none;
+    margin: 5px;
+    appearance: none; /* Remove default dropdown arrow */
+    // background-image: url('path_to_custom_arrow_icon.png'); /* Add custom dropdown arrow */
+    background-repeat: no-repeat;
+    background-position: right center;
+    cursor: pointer;
+  }
+  
+  .select::placeholder {
+    color: var(--font-color-sub);
+    opacity: 0.8;
+  }
+
+  .textarea {
+    --font-color: #323232;
+    --font-color-sub: #666;
+    --bg-color: #fff;
+    --main-color: #323232;
+    height: 100px;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    background-color: var(--bg-color);
+    box-shadow: 4px 4px var(--main-color);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--font-color);
+    padding: 5px 10px;
+    margin: 5px;
+    outline: none;
+    resize: vertical; /* Allow vertical resizing */
+  }
+  
+  .textarea::placeholder {
+    color: var(--font-color-sub);
+    opacity: 0.8;
+  }
+
+
+.arc-btn-retro {
+    margin: 5px !important;
+}
+
+button {
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 6px;
+    font-size: 17px;
+    transition: .4s;
+    color: black;
+    padding: 0.3rem 1.2rem;
+}
+
+button:disabled {
+    color: #a2a2a2;
+}
+
+button:hover:enabled {
+    box-shadow: 5px 6px 0px rgb(0, 0, 0);
+}
+
+button:enabled {
+    cursor: pointer;
+}
+  

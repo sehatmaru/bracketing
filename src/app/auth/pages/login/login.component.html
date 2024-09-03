@@ -1,0 +1,27 @@
+<div class="container">
+    <div style="width: 300px;">
+        <h3>bracketing</h3>
+        
+        <p>Design, Create, Win Your Bracket!</p>
+        
+        <div class="form-container">
+            <input type="text" id="username" class="input" placeholder="Username" [(ngModel)]="username"
+                (keyup.enter)="isValid() ? doLogin() : null">
+        </div>
+    
+        <div class="form-container">
+            <input type="password" id="password" class="input" placeholder="Password" [(ngModel)]="password"
+                (keyup.enter)="isValid() ? doLogin() : null">
+        </div>
+    
+        <p style="font-size: 0.9rem !important;">Click <span style="cursor: pointer; font-weight: 700;" (click)="toRegister()">here</span> to Sign Up</p>
+        <p style="font-size: 0.9rem !important;"><span style="cursor: pointer; font-weight: 700;" (click)="toForgotPassword()">Forgotten password?</span></p>
+
+        <div class="form-container" style="margin-left: 5px;">
+            <button class="arc-btn-retro" style="margin-left: auto !important;" 
+                (click)="doLogin()" [disabled]="!isValid()">
+                Log In
+            </button>
+        </div>
+    </div>
+</div>
