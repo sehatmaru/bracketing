@@ -1,36 +1,36 @@
 @media only screen and (min-width: 1011px) {
-    .key-card {
+    .data-card {
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }
 
 @media only screen and (min-width: 841px) and (max-width: 1010px) {
-    .key-card {
+    .data-card {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
 @media only screen and (min-width: 611px) and (max-width: 840px) {
-    .key-card {
+    .data-card {
         grid-template-columns: 1fr 1fr;
     }
 }
 
 @media only screen and (max-width: 610px) {
-    .key-card {
+    .data-card {
         grid-template-columns: 1fr;
     }
 
-    .key:active {
+    .data:active {
         animation: press 0.2s 1 linear;
     }
 
-    .key {
+    .data {
         box-shadow: 5px 6px 0px rgb(0, 0, 0) !important;
     }
 }
 
-.key-card {
+.data-card {
     max-height: calc(100dvh - 135px);
     margin: 10px;
     overflow: auto;
@@ -41,7 +41,7 @@ p {
     margin-bottom: 0 !important;
 }
 
-.key {
+.data {
     display: flex;
     margin: 5px;
     border: 1px solid;
@@ -51,7 +51,7 @@ p {
     cursor: pointer;
 }
 
-.key:hover {
+.data:hover {
     box-shadow: 5px 6px 0px rgb(0, 0, 0);
 }
 
@@ -61,7 +61,7 @@ p {
     // border-radius: 5px;
 }
 
-.key-detail {
+.data-detail {
     margin-left: 5px;
 }
 

@@ -1,4 +1,4 @@
-export interface CommonResponsei<T> {
+export interface CommonResponse<T> {
     result: T;
     message: string;
     statusCode: number;

@@ -112,7 +112,7 @@ export class CommonService {
   }
 
   // tslint:disable-next-line: max-line-length
-  post(url: string, body: any, isTmdb: boolean, reqOpts?: any, searchParam?: any, isNeedError?: boolean, maxRetry?: number, reqTimeout?: number): boolean | Observable<any> {
+  post(url: string, body: any, reqOpts?: any, searchParam?: any, isNeedError?: boolean, maxRetry?: number, reqTimeout?: number): boolean | Observable<any> {
 
     if (this.checkConnection()) {
       if (reqOpts) {

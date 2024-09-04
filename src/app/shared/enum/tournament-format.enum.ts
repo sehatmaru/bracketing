@@ -1,0 +1,7 @@
+export enum TournamentFormat {
+  SINGLE_ELIMINATION,
+  DOUBLE_ELIMINATION,
+  ROUND_ROBIN,
+  SWISS,
+  FREE_FOR_ALL
+}
