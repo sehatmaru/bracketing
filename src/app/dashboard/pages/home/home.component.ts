@@ -64,8 +64,8 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('reveal?secureId=' + secureId)
   }
 
-  toHistory() {
-    this.router.navigateByUrl('history')
+  toDetail(id: number) {
+    this.router.navigateByUrl('tournament/' + id)
   }
 
   clearSearch() {

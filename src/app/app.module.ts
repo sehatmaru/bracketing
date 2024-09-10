@@ -15,6 +15,7 @@ import { LoaderComponent } from './shared/component/loader/loader.component';
 import { CommonInterceptor } from './shared/interceptor/common.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { TournamentModule } from './tournament/tournament.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     BrowserAnimationsModule,
     AuthModule,
     DashboardModule,
+    TournamentModule,
     ClipboardModule,
     RouterModule.forRoot([]),
     NgbModule,

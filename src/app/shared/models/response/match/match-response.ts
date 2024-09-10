@@ -15,4 +15,6 @@ class TeamMatchResponse {
     public id = 0
     public name = ''
     public number = 0
+    public score = 0
+    public isWinner = false
 }

@@ -1,0 +1,325 @@
+.data-card {
+    grid-template-columns: 1fr;
+    // max-height: calc(100dvh - 135px);
+    margin: 10px;
+    overflow: auto;
+    display: grid;
+}
+
+.data-view {
+    margin: 10px;
+
+    .data-group {
+        display: grid;
+        // grid-template-columns: 1fr 1fr 1fr 1fr;
+
+        .group-info {
+            // border: 1px solid black;
+            border-radius: 8px;
+            width: 80%;
+            margin: auto;
+
+            .group-info-header {
+                display: grid;
+                grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr;
+                color: white;
+                background: black;
+                padding: 5px;
+                border-radius: 7px;
+
+                .group-name {
+                    font-size: larger;
+                    font-weight: 700;
+                    margin-left: 10px;
+                }
+
+                .group-category {
+                    font-size: small;
+                    text-align: center;
+                    margin-top: auto;
+                }
+            }
+
+            .group-info-team-detail {
+                display: grid;
+                grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr;
+                padding: 5px;
+                border-radius: 7px;
+                margin-top: 5px;
+
+                .group-name-number {
+                    display: grid;
+                    margin-left: 2px;
+                    grid-template-columns: auto 1fr;
+                    column-gap: 3px;
+                }
+
+                .team-number {
+                    font-size: x-small;
+                }
+
+                .team-detail {
+                    text-align: center;
+                }
+            }
+
+            .advance-team {
+                background: rgb(131 176 131 / 40%);
+            }
+        }
+    }
+}
+
+p {
+    margin-bottom: 0 !important;
+}
+
+.data {
+    display: flex;
+    margin: 5px;
+    border: 1px solid;
+    border-radius: 5px;
+    transition: .4s;
+    padding: 5px;
+    box-shadow: 5px -6px 0px rgb(0, 0, 0);
+    // cursor: pointer;
+
+    .data-action {
+        border-top: 1px solid black;
+        margin: -5px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        height: 40px;
+
+        .btn-action {
+            display: flex;
+            transition: 0.4s;
+            padding: 5px;
+            cursor: pointer;
+            text-align: center;
+
+            p {
+                margin: auto !important;
+            }
+        }
+
+        .btn-action:hover {
+            background: black;
+            color: white;
+        }
+    }
+}
+
+.bp-10 {
+    padding-bottom: 10px;
+}
+
+.img-icon {
+    width: 50px;
+    // border: 1px solid;
+    // border-radius: 5px;
+}
+
+.data-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 5px;
+
+    .data-value {
+        font-size: smaller;
+    }
+}
+
+.search {
+    display: grid;
+    grid-template-columns: 8fr 1fr 0fr;
+    margin: 10px;
+}
+
+.clear {
+    height: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
+}
+
+.copy {
+    transition: 0.7s;
+}
+
+.copy:active {
+    animation: press 0.2s 1 linear;
+}
+
+.copy:active svg:last-child {
+    animation: bounce 0.2s 1 linear;
+}
+
+@keyframes press {
+    0% {
+        transform: scale(1);
+    }
+  
+    50% {
+        transform: scale(0.92);
+    }
+  
+    to {
+        transform: scale(1);
+    }
+}
+  
+@keyframes bounce {
+    50% {
+        transform: rotate(5deg) translate(20px, -50px);
+    }
+  
+    to {
+        transform: scale(0.9) rotate(10deg) translate(50px, -80px);
+        opacity: 0;
+    }
+}
+
+.larger-btn:hover {
+    width: 145px !important;
+}
+
+.Btn {
+    --black: #000000;
+    --ch-black: #141414;
+    --eer-black: #1b1b1b;
+    --night-rider: #2e2e2e;
+    --white: #ffffff;
+    --af-white: #f3f3f3;
+    --ch-white: #e1e1e1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199) !important;
+    background-color: var(--white);
+    padding: 0 !important;
+}
+  
+/* plus sign */
+.sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.sign svg {
+    width: 17px;
+}
+  
+.sign svg path {
+    fill: var(--night-rider);
+}
+
+/* text */
+.text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: var(--night-rider);
+    font-weight: 600;
+    transition-duration: .3s;
+    white-space: nowrap;
+}
+  
+@media only screen and (min-width: 426px) {
+    /* hover effect on button width */
+    .Btn:hover {
+        width: 125px;
+        border-radius: 5px;
+        transition-duration: .3s;
+    }
+    
+    .Btn:hover .sign {
+        width: 30%;
+        transition-duration: .3s;
+        padding-left: 20px;
+    }
+    /* hover effect button's text */
+    .Btn:hover .text {
+        opacity: 1;
+        width: 70%;
+        transition-duration: .3s;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+    /* button click effect*/
+    .Btn:active {
+        transform: translate(2px ,2px);
+    }
+
+    .generate:hover {
+        width: 248px !important;
+    }
+}
+
+.bracket-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; /* Ensure stages are evenly spaced horizontally */
+    align-items: center; /* Center the stages vertically */
+    // height: 100vh; /* Full viewport height to ensure vertical centering */
+}
+
+.stage-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    flex: 1;
+}
+
+.match {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    margin: 10px 0;
+    width: 250px;
+    text-align: center;
+    // background-color: #f9f9f9;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 5px -6px 0px rgb(0, 0, 0);
+}
+
+.team {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    padding: 2px;
+}
+
+.team-top {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.team-lost {
+    background: rgba(0, 0, 0, 0.2);
+    color: darkgrey;
+}
+
+.stage-title {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.x-small {
+    font-size: 12px;
+    margin: auto !important;
+}
+
+.score-winner {
+    color: hotpink;
+}

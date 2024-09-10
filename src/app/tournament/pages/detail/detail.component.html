@@ -1,0 +1,118 @@
+<div>
+    <div class="data-card">
+        <div class="data" style="display: grid">
+            <div class="data-detail">
+                <div>
+                    <div>
+                        <p><b>Tournament Name</b></p>
+                        <p class="data-value bp-10">{{ tournamentDetailData.name }}</p>
+                    </div>
+                    <div>
+                        <p><b>Format</b></p>
+                        <p class="data-value bp-10">{{ tournamentDetailData.type }}</p>
+                    </div>
+                    <div>
+                        <p><b>Participant</b></p>
+                        <p class="data-value bp-10">{{ tournamentDetailData.participants }}</p>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <p><b>Current Stage</b></p>
+                        <p class="data-value bp-10">{{ tournamentDetailData.stage }}</p>
+                    </div>
+                    <div>
+                        <p><b>Status</b></p>
+                        <p class="data-value bp-10">{{ tournamentDetailData.status }}</p>
+                    </div>
+                    <div>
+                        <p><b>URL</b></p>
+                        <p class="data-value bp-10" style="cursor: pointer;"><i>{{ tournamentDetailData.url }}</i></p>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <p><b>Create Date</b></p>
+                        <p class="data-value bp-10">{{ tournamentDetailData.createdAt | date : 'medium' }}</p>
+                    </div>
+                    <div>
+                        <p><b>Start Date</b></p>
+                        <p class="data-value bp-10">{{ tournamentDetailData.startedAt ? (tournamentDetailData.startedAt | date : 'medium') : '-' }}</p>
+                    </div>
+                    <div>
+                        <p><b>End Date</b></p>
+                        <p class="data-value bp-10">{{ tournamentDetailData.endAt ? (tournamentDetailData.endAt | date : 'medium') : '-' }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="data-action" [ngStyle]="{'grid-template-columns': getActionBtnGridTemplateColumns()}">
+                <div *ngIf="isStatusWaiting()" class="btn-action" (click)="startTournament()">
+                    <p>Start</p>
+                </div>
+                <div *ngIf="isStatusWaiting()" class="btn-action" (click)="randomizeTeam()">
+                    <p>Randomize Team</p>
+                </div>
+                <div *ngIf="isGroupFormat()" class="btn-action" (click)="openGroup()">
+                    <p>View Group</p>
+                </div>
+                <div class="btn-action" (click)="openBracket()">
+                    <p>View Bracket</p>
+                </div>
+                <div class="btn-action">
+                    <p>Delete</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="data-view">
+        <div class="data-group" *ngIf="isGroupOpen" @fadeInOut [ngStyle]="{'grid-template-columns': getGroupGridTemplateColumns()}">
+            <div *ngFor="let group of tournamentDetailData.groups" class="group-info">
+                <div class="group-info-header">
+                    <p class="group-name">{{ group.name }}</p>
+                    <p class="group-category">P</p>
+                    <p class="group-category">W</p>
+                    <p class="group-category">D</p>
+                    <p class="group-category">L</p>
+                    <p class="group-category">Pts</p>
+                </div>
+                <div class="group-info-team" *ngFor="let team of group.teams; let i = index">
+                    <div class="group-info-team-detail" [ngClass]="{'advance-team': i < tournamentDetailData.groupAdvanceParticipants}">
+                        <div class="group-name-number">
+                            <p class="team-number">{{ team.number }}</p>
+                            <p class="team-name"><b>{{ team.name }}</b></p>
+                        </div>
+                        <p class="team-detail">{{ team.played }}</p>
+                        <p class="team-detail">{{ team.wins }}</p>
+                        <p class="team-detail">{{ team.draws }}</p>
+                        <p class="team-detail">{{ team.loses }}</p>
+                        <p class="team-detail">{{ team.point }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div *ngIf="isBracketOpen" @fadeInOut>
+            <div class="bracket-container">
+                <div *ngFor="let stage of stages" class="stage-column">
+                  <div *ngFor="let match of getMatchesForStage(stage)" class="match">
+                    <div class="team team-top" [ngClass]="{'team-lost': isMatchFinished(match.status) && !match.teamA.isWinner}">
+                        <p class="status x-small">{{ match.teamA?.number || '' }}</p>
+                        <p class="status" style="text-align: left;">{{ match.teamA?.name || 'TBD' }}</p>
+                        <p class="status x-small" [ngClass]="{'score-winner': isMatchFinished(match.status) && match.teamA.isWinner}">
+                            {{ match.teamA == null ? '' : match.teamA.score }}
+                        </p>
+                    </div>
+                    <div class="team" [ngClass]="{'team-lost': isMatchFinished(match.status) && !match.teamB.isWinner}">
+                        <p class="status x-small">{{ match.teamB?.number || '' }}</p>
+                        <p class="status" style="text-align: left;">{{ match.teamB?.name || 'TBD' }}</p>
+                        <p class="status x-small" [ngClass]="{'score-winner': isMatchFinished(match.status) && match.teamB.isWinner}">
+                            {{ match.teamB == null ? '' : match.teamB.score }}
+                        </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

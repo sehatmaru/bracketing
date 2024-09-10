@@ -6,6 +6,7 @@ import { GroupDetailResponse } from "./group-detail-response"
 
 export class TournamentDetailResponse {
     public id = 0
+    public name = ''
     public host = ''
     public description = ''
     public url = ''

@@ -15,8 +15,6 @@ export class CommonInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(next);
-    
     return next.handle(request).pipe(
       tap(event => {
         if (event instanceof HttpResponse && event.body.statusCode !== StatusCode.SUCCESS) {

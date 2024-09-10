@@ -241,6 +241,8 @@ export class Utils {
   }
 
   openLoadingDialog() {
+    if (this.dialogRef != null) this.closeLoadingDialog()
+    
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
