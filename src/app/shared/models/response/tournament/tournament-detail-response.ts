@@ -1,7 +1,6 @@
 import { MatchStage } from "src/app/shared/enum/match-stage.enum"
 import { TournamentFormat } from "src/app/shared/enum/tournament-format.enum"
 import { TournamentStatus } from "src/app/shared/enum/tournament-status.enum"
-import { TournamentType } from "src/app/shared/enum/tournament-type.enum"
 import { GroupDetailResponse } from "./group-detail-response"
 
 export class TournamentDetailResponse {
@@ -10,8 +9,7 @@ export class TournamentDetailResponse {
     public host = ''
     public description = ''
     public url = ''
-    public format: TournamentFormat = TournamentFormat.SINGLE_ELIMINATION
-    public type: TournamentType = TournamentType.SINGLE_STAGE
+    public format: TournamentFormat = TournamentFormat.KNOCKOUT
     public participants = 0
     public groupParticipants = 0
     public groupAdvanceParticipants = 0

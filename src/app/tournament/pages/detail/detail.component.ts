@@ -7,11 +7,11 @@ import { TournamentService } from 'src/app/shared/service/tournament.service';
 import { Utils } from 'src/app/shared/utils/utils';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { TournamentStatus } from 'src/app/shared/enum/tournament-status.enum';
-import { TournamentType } from 'src/app/shared/enum/tournament-type.enum';
 import { MatchService } from 'src/app/shared/service/match.service';
 import { MatchResponse } from 'src/app/shared/models/response/match/match-response';
 import { MatchStage } from 'src/app/shared/enum/match-stage.enum';
 import { MatchStatus } from 'src/app/shared/enum/match-status.enum';
+import { TournamentFormat } from 'src/app/shared/enum/tournament-format.enum';
 
 @Component({
   selector: 'app-detail',
@@ -70,11 +70,14 @@ export class DetailComponent implements OnInit {
           this.tournamentDetailData = resp.result
 
           if (this.isGroupFormat()) {
-            this.openGroup()
             this.groupGridTemplateColumns = this.tournamentDetailData.groups.length
+            if (this.groupGridTemplateColumns > 4) this.groupGridTemplateColumns = 4
 
             if (this.isGroupStage()) {
+              this.openGroup()
               this.actionBtnGridTemplateColumns -= 0
+            } else {
+              this.openBracket()
             }
           } else {
             this.openBracket()
@@ -167,6 +170,7 @@ export class DetailComponent implements OnInit {
     this.isGroupOpen = true
     this.isBracketOpen = false
 
+    // this.getTournamentDetail()
     this.getTournamentMatchList()
   }
 
@@ -174,11 +178,12 @@ export class DetailComponent implements OnInit {
     this.isGroupOpen = false
     this.isBracketOpen = true
   
+    // this.getTournamentDetail()
     this.getTournamentMatchList()
   }
 
   isGroupFormat(): boolean {
-    return this.tournamentDetailData.type == TournamentType.TWO_STAGE
+    return this.tournamentDetailData.format == TournamentFormat.GROUP
   }
 
   getActionBtnGridTemplateColumns(): string {
@@ -203,6 +208,10 @@ export class DetailComponent implements OnInit {
 
   getMatchesForStage(stage: string): MatchResponse[] {
     return this.matches.filter(match => match.stage === stage);
+  }
+
+  getMatchesForGroup(groupId: number): MatchResponse[] {
+    return this.matches.filter(match => match.groupId === groupId);
   }
 
   isMatchFinished(status: MatchStatus) {

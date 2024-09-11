@@ -8,6 +8,8 @@ export class MatchResponse {
     public teamB: TeamMatchResponse = new TeamMatchResponse()
     public winner = 0
     public status: MatchStatus = MatchStatus.WAITING
+    public groupId = 0
+    public number = 0
     public endAt = new Date()
 }
 

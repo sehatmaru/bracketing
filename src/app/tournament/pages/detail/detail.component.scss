@@ -8,6 +8,7 @@
 
 .data-view {
     margin: 10px;
+    overflow: auto;
 
     .data-group {
         display: grid;
@@ -50,7 +51,7 @@
                 .group-name-number {
                     display: grid;
                     margin-left: 2px;
-                    grid-template-columns: auto 1fr;
+                    grid-template-columns: 1fr 9fr;
                     column-gap: 3px;
                 }
 
@@ -271,55 +272,108 @@ p {
 .bracket-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around; /* Ensure stages are evenly spaced horizontally */
-    align-items: center; /* Center the stages vertically */
-    // height: 100vh; /* Full viewport height to ensure vertical centering */
+    justify-content: space-around;
+    align-items: center;
+    width: 2500px;
+
+    .match {
+        display: grid;
+        grid-template-columns: 1fr 11fr;
+        border: 1px solid rgba(0, 0, 0, 0.6);
+        margin: 10px 0;
+        width: 250px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 4px;
+        box-shadow: 5px -6px 0px rgb(0, 0, 0);
+
+        .match-number {
+            margin: auto;
+            font-size: small;
+        }
+
+        .match-team {
+            border-left: 1px solid rgba(0, 0, 0, 0.6);
+    
+            .team {
+                display: grid;
+                grid-template-columns: 1fr 6fr 1fr;
+                padding: 2px;
+            }
+            
+            .team-top {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+            }
+            
+            .team-lost {
+                background: rgba(0, 0, 0, 0.2);
+                color: darkgrey;
+            }
+            
+            .stage-title {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+            
+            .x-small {
+                font-size: 12px;
+                margin: auto !important;
+            }
+            
+            .score-winner {
+                color: hotpink;
+            }
+        }
+    }
 }
 
-.stage-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center items vertically */
-    align-items: center; /* Center items horizontally */
-    flex: 1;
-}
+.group-info-match {
+    .match {
+        display: grid;
+        grid-template-columns: 1fr 11fr;
+        border: 1px solid rgba(0, 0, 0, 0.6);
+        margin: 25px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 4px;
+        box-shadow: 5px -6px 0px rgb(0, 0, 0);
+        
+        .match-number {
+            margin: auto;
+            font-size: small;
+        }
 
-.match {
-    border: 1px solid rgba(0, 0, 0, 0.6);
-    margin: 10px 0;
-    width: 250px;
-    text-align: center;
-    // background-color: #f9f9f9;
-    cursor: pointer;
-    border-radius: 4px;
-    box-shadow: 5px -6px 0px rgb(0, 0, 0);
-}
-
-.team {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    padding: 2px;
-}
-
-.team-top {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
-}
-
-.team-lost {
-    background: rgba(0, 0, 0, 0.2);
-    color: darkgrey;
-}
-
-.stage-title {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-}
-
-.x-small {
-    font-size: 12px;
-    margin: auto !important;
-}
-
-.score-winner {
-    color: hotpink;
+        .match-team {
+            border-left: 1px solid rgba(0, 0, 0, 0.6);
+    
+            .team {
+                display: grid;
+                grid-template-columns: 1fr 6fr 1fr;
+                padding: 2px;
+            }
+            
+            .team-top {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+            }
+            
+            .team-lost {
+                // background: rgba(0, 0, 0, 0.2);
+                // color: darkgrey;
+            }
+            
+            .stage-title {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+            
+            .x-small {
+                font-size: 12px;
+                margin: auto !important;
+            }
+            
+            .score-winner {
+                color: hotpink;
+            }
+        }
+    }
 }
