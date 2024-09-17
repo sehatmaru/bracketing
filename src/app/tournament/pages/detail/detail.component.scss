@@ -9,6 +9,7 @@
 .data-view {
     margin: 10px;
     overflow: auto;
+    height: 70vh;
 
     .data-group {
         display: grid;
@@ -354,11 +355,6 @@ p {
             
             .team-top {
                 border-bottom: 1px solid rgba(0, 0, 0, 0.6);
-            }
-            
-            .team-lost {
-                // background: rgba(0, 0, 0, 0.2);
-                // color: darkgrey;
             }
             
             .stage-title {

@@ -46,10 +46,10 @@
                 </div>
             </div>
             <div class="data-action" [ngStyle]="{'grid-template-columns': getActionBtnGridTemplateColumns()}">
-                <div *ngIf="isStatusWaiting()" class="btn-action" (click)="startTournament()">
+                <div *ngIf="!isTournamentStarted()" class="btn-action" (click)="startTournament()">
                     <p>Start</p>
                 </div>
-                <div *ngIf="isStatusWaiting()" class="btn-action" (click)="randomizeTeam()">
+                <div *ngIf="!isTournamentStarted()" class="btn-action" (click)="randomizeTeam()">
                     <p>Randomize Team</p>
                 </div>
                 <div *ngIf="isGroupFormat()" class="btn-action" (click)="openGroup()">
@@ -67,7 +67,7 @@
 
     <div class="data-view">
         <div class="data-group" *ngIf="isGroupOpen" @fadeInOut [ngStyle]="{'grid-template-columns': getGroupGridTemplateColumns()}">
-            <div *ngFor="let group of tournamentDetailData.groups" class="group-info">
+            <div *ngFor="let group of groups" class="group-info">
                 <div class="group-info-header">
                     <p class="group-name">{{ group.name }}</p>
                     <p class="group-category">P</p>
@@ -90,21 +90,21 @@
                     </div>
                 </div>
                 <div class="group-info-match">
-                    <div *ngFor="let match of getMatchesForGroup(group.id)" class="match">
+                    <div *ngFor="let match of getMatchesForGroup(group.id)" class="match" (click)="openMatchDialog(match.id)">
                         <div class="match-number">
                             {{ match.number }}
                         </div>
                         <div class="match-team">
                             <div class="team team-top" [ngClass]="{'team-lost': isMatchFinished(match.status) && !match.teamA.isWinner}">
-                                <p class="status x-small">{{ match.teamA?.number || '' }}</p>
-                                <p class="status" style="text-align: left;">{{ match.teamA?.name || 'TBD' }}</p>
+                                <p class="status x-small">{{ match.teamA.number || '' }}</p>
+                                <p class="status" style="text-align: left;">{{ match.teamA.name || 'TBD' }}</p>
                                 <p class="status x-small" [ngClass]="{'score-winner': isMatchFinished(match.status) && match.teamA.isWinner}">
                                     {{ match.teamA == null ? '' : match.teamA.score }}
                                 </p>
                             </div>
                             <div class="team" [ngClass]="{'team-lost': isMatchFinished(match.status) && !match.teamB.isWinner}">
-                                <p class="status x-small">{{ match.teamB?.number || '' }}</p>
-                                <p class="status" style="text-align: left;">{{ match.teamB?.name || 'TBD' }}</p>
+                                <p class="status x-small">{{ match.teamB.number || '' }}</p>
+                                <p class="status" style="text-align: left;">{{ match.teamB.name || 'TBD' }}</p>
                                 <p class="status x-small" [ngClass]="{'score-winner': isMatchFinished(match.status) && match.teamB.isWinner}">
                                     {{ match.teamB == null ? '' : match.teamB.score }}
                                 </p>
@@ -118,21 +118,21 @@
         <div *ngIf="isBracketOpen" @fadeInOut>
             <div class="bracket-container">
                 <div *ngFor="let stage of stages" class="stage-column">
-                    <div *ngFor="let match of getMatchesForStage(stage)" class="match">
+                    <div *ngFor="let match of getMatchesForStage(stage)" class="match" (click)="openMatchDialog(match.id)">
                         <div class="match-number">
                             {{ match.number }}
                         </div>
                         <div class="match-team">
                             <div class="team team-top" [ngClass]="{'team-lost': isMatchFinished(match.status) && !match.teamA.isWinner}">
-                                <p class="status x-small">{{ match.teamA?.number || '' }}</p>
-                                <p class="status" style="text-align: left;">{{ match.teamA?.name || 'TBD' }}</p>
+                                <p class="status x-small">{{ match.teamA.number || '' }}</p>
+                                <p class="status" style="text-align: left;">{{ match.teamA.name || 'TBD' }}</p>
                                 <p class="status x-small" [ngClass]="{'score-winner': isMatchFinished(match.status) && match.teamA.isWinner}">
                                     {{ match.teamA == null ? '' : match.teamA.score }}
                                 </p>
                             </div>
                             <div class="team" [ngClass]="{'team-lost': isMatchFinished(match.status) && !match.teamB.isWinner}">
-                                <p class="status x-small">{{ match.teamB?.number || '' }}</p>
-                                <p class="status" style="text-align: left;">{{ match.teamB?.name || 'TBD' }}</p>
+                                <p class="status x-small">{{ match.teamB.number || '' }}</p>
+                                <p class="status" style="text-align: left;">{{ match.teamB.name || 'TBD' }}</p>
                                 <p class="status x-small" [ngClass]="{'score-winner': isMatchFinished(match.status) && match.teamB.isWinner}">
                                     {{ match.teamB == null ? '' : match.teamB.score }}
                                 </p>

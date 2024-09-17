@@ -1,0 +1,35 @@
+<div>
+    <div class="data-card">
+        <div class="data" style="display: grid">
+            <div class="data-detail">
+                <div class="data-header">
+                    <div><b>Match {{ match.number }}</b></div>
+                    <div>{{ match.stage }}</div>
+                    <div><b>{{ match.status }}</b></div>
+                </div>
+                <div class="data-team">
+                    <div class="team-number">{{ match.teamA.number || '' }}</div>
+                    <div class="team-name">{{ match.teamA.name || 'TBD' }}</div>
+                    <div class="team-score">
+                        <input class="score" type="text" [(ngModel)]="scoreA" [disabled]="isMatchFinished() || !isMatchReady() || !isTournamentStarted" maxlength="1">
+                    </div>
+                </div>
+                <div class="data-team">
+                    <div class="team-number">{{ match.teamB.number || '' }}</div>
+                    <div class="team-name">{{ match.teamB.name || 'TBD' }}</div>
+                    <div class="team-score">
+                        <input class="score" type="text" [(ngModel)]="scoreB" [disabled]="isMatchFinished() || !isMatchReady() || !isTournamentStarted" maxlength="1">
+                    </div>
+                </div>
+            </div>
+            <div class="data-action" *ngIf="isTournamentStarted && !isMatchFinished() && isMatchReady()">
+                <div class="btn-action" (click)="cancel()">
+                    <p>Cancel</p>
+                </div>
+                <div class="btn-action" (click)="saveScore()">
+                    <p>Save</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,6 +20,10 @@ export class TournamentService {
     return this.commonApi.get(`${this.root}/list`) as Observable<CommonResponse<TournamentListResponse[]>>;
   }
 
+  getGroupList(tournamentId: number): Observable<CommonResponse<GroupDetailResponse[]>> {
+    return this.commonApi.get(`${this.root}/group/list/${tournamentId}`) as Observable<CommonResponse<GroupDetailResponse[]>>;
+  }
+
   create(bodyRequest: CreateTournamentRequest): Observable<CommonResponse<CreateTournamentResponse>> {
     return this.commonApi.post(`${this.root}/create`, bodyRequest) as Observable<CommonResponse<CreateTournamentResponse>>;
   }

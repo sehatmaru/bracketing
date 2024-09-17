@@ -12,6 +12,10 @@ import { MatchResponse } from 'src/app/shared/models/response/match/match-respon
 import { MatchStage } from 'src/app/shared/enum/match-stage.enum';
 import { MatchStatus } from 'src/app/shared/enum/match-status.enum';
 import { TournamentFormat } from 'src/app/shared/enum/tournament-format.enum';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatchDetailComponent } from '../../dialog/match-detail/match-detail.component';
+import { MatchScoreRequest } from 'src/app/shared/models/request/match/match-score-request';
+import { GroupDetailResponse } from 'src/app/shared/models/response/tournament/group-detail-response';
 
 @Component({
   selector: 'app-detail',
@@ -40,6 +44,7 @@ export class DetailComponent implements OnInit {
 
   public matches: MatchResponse[] = [];
   public stages: string[] = [];
+  public groups: GroupDetailResponse[] = [];
 
   constructor(
     private tournamentService: TournamentService,
@@ -47,7 +52,8 @@ export class DetailComponent implements OnInit {
     private utils: Utils,
     private router: Router,
     private snackbar: MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) { }
   
   ngOnInit(): void {
@@ -70,8 +76,7 @@ export class DetailComponent implements OnInit {
           this.tournamentDetailData = resp.result
 
           if (this.isGroupFormat()) {
-            this.groupGridTemplateColumns = this.tournamentDetailData.groups.length
-            if (this.groupGridTemplateColumns > 4) this.groupGridTemplateColumns = 4
+            this.getTournamentGroupList()
 
             if (this.isGroupStage()) {
               this.openGroup()
@@ -88,7 +93,7 @@ export class DetailComponent implements OnInit {
             }
           }
 
-          if (!this.isStatusWaiting()) {
+          if (this.isTournamentStarted()) {
             this.actionBtnGridTemplateColumns -= 2
           }
         } else {
@@ -113,6 +118,29 @@ export class DetailComponent implements OnInit {
           this.matches = resp.result
 
           this.organizeStages();
+        } else {
+          this.snackbar.open(resp.message, 'OK', { duration: 5000 })
+        }
+
+        this.utils.closeLoadingDialog()
+      },
+      error: (error) => {
+        this.snackbar.open(error.message, 'OK', { duration: 5000 })
+        this.utils.closeLoadingDialog()
+      }
+    });
+  }
+
+  getTournamentGroupList() {
+    this.utils.openLoadingDialog()
+
+    this.tournamentService.getGroupList(this.tournamentId).subscribe({
+      next: (resp) => {
+        if (resp.statusCode == StatusCode.SUCCESS) {
+          this.groups = resp.result
+
+          this.groupGridTemplateColumns = this.groups.length
+          if (this.groupGridTemplateColumns > 4) this.groupGridTemplateColumns = 4
         } else {
           this.snackbar.open(resp.message, 'OK', { duration: 5000 })
         }
@@ -166,6 +194,29 @@ export class DetailComponent implements OnInit {
     });
   }
 
+  submitScore(matchId: number, request: MatchScoreRequest) {
+    this.utils.openLoadingDialog()
+
+    this.matchService.submitScore(matchId, request).subscribe({
+      next: (resp) => {
+        if (resp.statusCode == StatusCode.SUCCESS) {
+          if (this.isGroupFormat()) {
+            this.getTournamentGroupList()
+          }
+          this.getTournamentMatchList()
+        } else {
+          this.snackbar.open(resp.message, 'OK', { duration: 5000 }) 
+        }
+
+        this.utils.closeLoadingDialog()
+      },
+      error: (error) => {
+        this.snackbar.open(error.message, 'OK', { duration: 5000 })
+        this.utils.closeLoadingDialog()
+      }
+    });
+  }
+
   openGroup() {
     this.isGroupOpen = true
     this.isBracketOpen = false
@@ -194,8 +245,8 @@ export class DetailComponent implements OnInit {
     return `repeat(${this.groupGridTemplateColumns}, 1fr)`
   }
   
-  isStatusWaiting(): boolean {
-    return this.tournamentDetailData.status == TournamentStatus.WAITING
+  isTournamentStarted(): boolean {
+    return this.tournamentDetailData.status == TournamentStatus.ON_PROGRESS
   }
 
   isGroupStage(): boolean {
@@ -218,4 +269,30 @@ export class DetailComponent implements OnInit {
     return status == MatchStatus.FINISHED
   }
 
+  getMatchDetail(matchId: number): MatchResponse {
+    return this.matches.filter( e => e.id == matchId)[0]
+  }
+
+  openMatchDialog(matchId: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      match: this.getMatchDetail(matchId),
+      isTournamentStarted: this.isTournamentStarted()
+    }
+
+    const dialogRef = this.dialog.open(MatchDetailComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const request = new MatchScoreRequest()
+        request.teamA.isWinner = result.teamA.isWinner
+        request.teamA.score = result.teamA.score
+
+        request.teamB.isWinner = result.teamB.isWinner
+        request.teamB.score = result.teamB.score
+
+        this.submitScore(matchId, request)
+      }
+    });
+  }
 }

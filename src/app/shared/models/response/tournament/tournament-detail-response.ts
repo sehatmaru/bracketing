@@ -17,7 +17,6 @@ export class TournamentDetailResponse {
     public stage: MatchStage = MatchStage.OTHER
     public status: TournamentStatus = TournamentStatus.WAITING
     public teams: TeamTournamentDetail[] = []
-    public groups: GroupDetailResponse[] = []
     public createdAt = new Date()
     public startedAt = new Date()
     public endAt = new Date()
