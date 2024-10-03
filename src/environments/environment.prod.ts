@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseURL: 'https://api-xcode-tontonanku.up.railway.app/',
+  baseURL: 'https://api.rental.xcodeid.uk/',
   tmdbURL: 'https://api.themoviedb.org/3/'
 };
